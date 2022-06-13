@@ -16,9 +16,6 @@ public class CheckCollisions : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    public UnityEvent grabbedPoint;
-    public UnityEvent grabbedBonus;
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
