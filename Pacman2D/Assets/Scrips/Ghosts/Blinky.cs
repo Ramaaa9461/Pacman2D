@@ -5,11 +5,12 @@ public class Blinky : Ghost_Movement
 {
     void Update()
     {
-        if (body.velocity.magnitude < 1)
+        if (entitys_movement.Direction.magnitude == 0)
         {
             calculateDirection();
             entitys_movement.moveToDirection(direction);
         }
+            Debug.Log(entitys_movement.Direction.magnitude);
     }
 
     void calculateDirection()
@@ -18,22 +19,22 @@ public class Blinky : Ghost_Movement
         {
             case 0:
 
-                direction = new Vector2(1, 0);
+                direction = Vector2.up;
 
                 break;
             case 1:
 
-                direction = new Vector2(-1, 0);
+                direction = Vector2.down;
 
                 break;
             case 2:
 
-                direction = new Vector2(0, 1);
+                direction =Vector2.left;
 
                 break;
             case 3:
 
-                direction = new Vector2(0, -1);
+                direction = Vector2.right;
                 break;
         }
     }

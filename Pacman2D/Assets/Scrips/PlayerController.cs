@@ -27,8 +27,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator WaitAttack()
     {
-        yield return new WaitForSeconds(5f);
+        //animacion azul
 
+        yield return new WaitForSeconds(5f);
         canBeAttacked = false;
     }
 
