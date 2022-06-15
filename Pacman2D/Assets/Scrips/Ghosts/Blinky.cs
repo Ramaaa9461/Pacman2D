@@ -10,7 +10,6 @@ public class Blinky : Ghost_Movement
             calculateDirection();
             entitys_movement.moveToDirection(direction);
         }
-            Debug.Log(entitys_movement.Direction.magnitude);
     }
 
     void calculateDirection()

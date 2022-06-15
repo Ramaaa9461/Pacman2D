@@ -1,5 +1,6 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -16,11 +17,10 @@ public class Entitys_Movement : MonoBehaviour
         private set { direction = value; }
     }
 
-    void Update()
+    void Start()
     {
-        Vector2 newPosition = checkFreeCell(direction);
-
-        transform.position = newPosition;
+        Movement();
+        //transform.position = newPosition;
     }
 
     public void moveToDirection(Vector2 direction)
@@ -37,7 +37,6 @@ public class Entitys_Movement : MonoBehaviour
         cellPos += dir;
         TileBase tileBase = tile.GetTile(cellPos);
 
-
         if (tileBase == null)
         {
             pos = tile.CellToWorld(cellPos);
@@ -46,11 +45,38 @@ public class Entitys_Movement : MonoBehaviour
         {
             Direction = Vector2.zero;
         }
+        
+
 
         return pos;
     }
+    
+    async void Movement()
+    {
+        Task task;
 
-   
+        Vector2 newPosition = checkFreeCell(direction);
+
+       task = MoveToNewPosition(newPosition);
+
+        await Task.WhenAll(task);
+
+        Movement();
+    }
+
+   async Task MoveToNewPosition(Vector2 nextPosition)
+    {
+        float progress = 0;
+
+        while (progress <= 1)
+        {
+            transform.position = Vector3.Lerp(transform.position, nextPosition, progress);
+            progress += Time.deltaTime * 10;
+            await Task.Yield();
+        }
+    }
+
+
 
     //private void OnDrawGizmos()
     //{
