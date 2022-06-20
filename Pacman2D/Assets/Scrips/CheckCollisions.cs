@@ -1,54 +1,81 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public class CheckCollisions : MonoBehaviour
 {
-    const string pointTag = "Points";
-    const string bonusTag = "Bonus";
-    const string ghostTag = "Ghost";
+    [SerializeField] List<GameObject> ghosts;
+    [SerializeField] Tilemap tile;
 
     PlayerController playerController;
-
+    int count = 0;
     private void Awake()
     {
         playerController = GetComponent<PlayerController>();
     }
 
-    public UnityEvent grabbedPoint;
-    public UnityEvent grabbedBonus;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void CompareCollision(TileBase tileBase)
     {
-
-        if (collision.tag == pointTag)
+        if (tileBase.name == "Points")
         {
             playerController.AddPoint();
         }
-        if (collision.tag == bonusTag)
+        else if (tileBase.name == "Bonus")
         {
-            playerController.IsAttack();
+            playerController.CanBeAttacked = true;
+
+            //Pongo a los fantasmas azule
+
+            StartCoroutine(WaitAttack());
         }
-
-        Destroy(collision.gameObject);
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Update()
     {
-        if (collision.gameObject.tag == ghostTag)
+        for (int i = 0; i < ghosts.Count; i++)
         {
-            if (playerController.CanBeAttacked)
+            if (tile.WorldToCell(transform.position) == tile.WorldToCell(ghosts[i].transform.position))
             {
-                // se destruye el fantasma
-                collision.gameObject.SetActive(false);
-                
-            }
-            else
-            {
-                gameObject.SetActive(false);
+                    PlayerGhosthCollision(ghosts[i]);
+                count++;
+                Debug.Log(count);
             }
         }
+    }
+
+    void PlayerGhosthCollision(GameObject ghost)
+    {
+        if (playerController.CanBeAttacked)
+        {
+            // se destruye el fantasma
+            ghost.transform.position = ghost.GetComponent<Ghost_Movement>().initialPosition;
+        }
+        else
+        {
+            //gameObject.SetActive(false);
+            playerController.subtractLife();
+            ResetPositions();
+        }
+    }
+
+    void ResetPositions()
+    {
+        transform.position = tile.WorldToCell( playerController.initialPosition);
+
+        for (int i = 0; i < ghosts.Count; i++)
+        {
+            ghosts[i].transform.position = tile.WorldToCell( ghosts[i].GetComponent<Ghost_Movement>().initialPosition);
+        }
+    }
+
+    IEnumerator WaitAttack()
+    {
+        //animacion azul
+
+        yield return new WaitForSeconds(5f);
+        playerController.CanBeAttacked = false;
+        //Los vuelvo a su color original
     }
 }
+

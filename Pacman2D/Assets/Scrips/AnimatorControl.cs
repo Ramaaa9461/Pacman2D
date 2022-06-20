@@ -4,32 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Rigidbody2D))]
 public class AnimatorControl : MonoBehaviour
 {
+    Entitys_Movement entitys_Movement;
     Vector2 lastDirection;
     Animator animator;
-    Rigidbody2D body;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        body = GetComponent<Rigidbody2D>();
-
-        body.gravityScale = 0;
+        entitys_Movement = GetComponent<Entitys_Movement>();
     }
 
     void Update()
     {
-
-        if (body.velocity.magnitude > 0)
+        if (entitys_Movement.Direction.magnitude > 0)
         {
-            lastDirection = body.velocity.normalized;
+            lastDirection = entitys_Movement.Direction.normalized;
         }
 
         animator.SetFloat("Horizontal", lastDirection.x);
         animator.SetFloat("Vertical", lastDirection.y);
-        animator.SetFloat("Speed", Vector2.ClampMagnitude(body.velocity, 1).magnitude); // direction.magnitude / maxVelocity 
+        animator.SetFloat("Speed", Vector2.ClampMagnitude(entitys_Movement.Direction, 1).magnitude); // direction.magnitude / maxVelocity 
 
     }
 
