@@ -1,36 +1,85 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    int points = 0;
-    bool canBeAttacked = false;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] TextMeshProUGUI score_text;
+    [SerializeField] TextMeshProUGUI highScore_text;
+    [SerializeField] Image[] lifes;
 
+    const string highScorePath = "HS";
+
+    int score = 0;
+    int highSocre;
+    int life = 3;
+    public Vector2 initialPosition;
+    bool canBeAttacked = false;
+    
     public bool CanBeAttacked
     {
         get { return canBeAttacked; }
-        private set { }
+        set { canBeAttacked = value; }
     }
+
+    public int Life
+    {
+        get { return life; }
+        set { life = value; }
+    }
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey(highScorePath))
+        {
+            highSocre = PlayerPrefs.GetInt(highScorePath);
+        }
+
+        initialPosition = transform.position;
+    }
+
 
     public void AddPoint()
     {
-        points++;
+        score++;
+        if (score >= highSocre)
+        {
+            highSocre = score;
+        }
     }
 
-    public void IsAttack()
+    private void Update()
     {
-        canBeAttacked = true;
+        score_text.text = (score).ToString();
+        highScore_text.text = (highSocre).ToString();
 
-        StartCoroutine(WaitAttack());
+        if (life <= 0)
+        {
+            PlayerPrefs.SetInt(highScorePath, highSocre);
+        }
     }
-
-    IEnumerator WaitAttack()
+    
+    public void subtractLife()
     {
-        //animacion azul
+        life--;
 
-        yield return new WaitForSeconds(5f);
-        canBeAttacked = false;
+        if (life <= 0)
+        {
+            gameOverPanel.SetActive(true);
+        }
+
+        for (int i = 0; i < lifes.Length; i++)
+        {
+            lifes[i].enabled = false;
+        }
+        for (int i = 0; i < life; i++)
+        {
+            lifes[i].enabled = true;
+        }
+
+        
     }
+
 
 }
