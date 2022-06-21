@@ -7,8 +7,8 @@ using UnityEngine;
 public class AnimatorControl : MonoBehaviour
 {
     Entitys_Movement entitys_Movement;
-    Vector2 lastDirection;
     Animator animator;
+    Vector2 lastDirection;
 
     private void Awake()
     {
@@ -29,7 +29,6 @@ public class AnimatorControl : MonoBehaviour
 
     }
 
-    
 
 
 }

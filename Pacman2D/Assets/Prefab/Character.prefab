@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5597243022229259097}
   - component: {fileID: 3105507550433153718}
   - component: {fileID: 8666743178506063690}
-  - component: {fileID: 6089142901160771354}
   m_Layer: 0
   m_Name: Character
   m_TagString: Player
@@ -136,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   tile: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!114 &3105507550433153718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,15 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45585a9bc4dc0ee41b36716e5752488b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6089142901160771354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 463334162195314292}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51d7761d21679eb4a87d265aad909e14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  gameOverPanel: {fileID: 0}
+  score_text: {fileID: 0}
+  highScore_text: {fileID: 0}
+  lifes: []
+  initialPosition: {x: 0, y: 0}

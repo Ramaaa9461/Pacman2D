@@ -3,16 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class CheckCollisions : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> ghosts;
+    [SerializeField] GameObject player;
     [SerializeField] Tilemap tile;
 
     PlayerController playerController;
-    int count = 0;
+
     private void Awake()
     {
-        playerController = GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerController>();
+    }
+    private void Start()
+    {
+        PauseGame();
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < ghosts.Count; i++)
+        {
+            if (tile.WorldToCell(player.transform.position) == tile.WorldToCell(ghosts[i].transform.position))
+            {
+                PlayerGhosthCollision(ghosts[i]);
+            }
+        }
     }
 
     public void CompareCollision(TileBase tileBase)
@@ -20,27 +36,15 @@ public class CheckCollisions : MonoBehaviour
         if (tileBase.name == "Points")
         {
             playerController.AddPoint();
+
         }
         else if (tileBase.name == "Bonus")
         {
             playerController.CanBeAttacked = true;
 
-            //Pongo a los fantasmas azule
+            //Pongo a los fantasmas azules
 
             StartCoroutine(WaitAttack());
-        }
-    }
-
-    private void Update()
-    {
-        for (int i = 0; i < ghosts.Count; i++)
-        {
-            if (tile.WorldToCell(transform.position) == tile.WorldToCell(ghosts[i].transform.position))
-            {
-                    PlayerGhosthCollision(ghosts[i]);
-                count++;
-                Debug.Log(count);
-            }
         }
     }
 
@@ -48,12 +52,10 @@ public class CheckCollisions : MonoBehaviour
     {
         if (playerController.CanBeAttacked)
         {
-            // se destruye el fantasma
-            ghost.transform.position = ghost.GetComponent<Ghost_Movement>().initialPosition;
+            ghost.transform.position = ghost.GetComponent<Ghost_Movement>().InitialPosition;
         }
         else
         {
-            //gameObject.SetActive(false);
             playerController.subtractLife();
             ResetPositions();
         }
@@ -61,18 +63,25 @@ public class CheckCollisions : MonoBehaviour
 
     void ResetPositions()
     {
-        transform.position = tile.WorldToCell( playerController.initialPosition);
+        player.transform.position = playerController.InitialPosition;
 
         for (int i = 0; i < ghosts.Count; i++)
         {
-            ghosts[i].transform.position = tile.WorldToCell( ghosts[i].GetComponent<Ghost_Movement>().initialPosition);
+            ghosts[i].transform.position = ghosts[i].GetComponent<Ghost_Movement>().InitialPosition;
         }
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
     IEnumerator WaitAttack()
     {
-        //animacion azul
-
         yield return new WaitForSeconds(5f);
         playerController.CanBeAttacked = false;
         //Los vuelvo a su color original

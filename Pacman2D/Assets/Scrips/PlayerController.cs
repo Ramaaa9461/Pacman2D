@@ -13,10 +13,16 @@ public class PlayerController : MonoBehaviour
 
     int score = 0;
     int highSocre;
+    Vector2 initialPosition;
     int life = 3;
-    public Vector2 initialPosition;
     bool canBeAttacked = false;
-    
+
+    public Vector2 InitialPosition
+    {
+        get { return initialPosition; }
+        set { initialPosition = value; }
+    }
+
     public bool CanBeAttacked
     {
         get { return canBeAttacked; }
@@ -39,10 +45,10 @@ public class PlayerController : MonoBehaviour
         initialPosition = transform.position;
     }
 
-
     public void AddPoint()
     {
         score++;
+
         if (score >= highSocre)
         {
             highSocre = score;
@@ -53,11 +59,6 @@ public class PlayerController : MonoBehaviour
     {
         score_text.text = (score).ToString();
         highScore_text.text = (highSocre).ToString();
-
-        if (life <= 0)
-        {
-            PlayerPrefs.SetInt(highScorePath, highSocre);
-        }
     }
     
     public void subtractLife()
@@ -67,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if (life <= 0)
         {
             gameOverPanel.SetActive(true);
+            PlayerPrefs.SetInt(highScorePath, highSocre);
         }
 
         for (int i = 0; i < lifes.Length; i++)
@@ -77,9 +79,5 @@ public class PlayerController : MonoBehaviour
         {
             lifes[i].enabled = true;
         }
-
-        
     }
-
-
 }
