@@ -92,7 +92,12 @@ public class Entitys_Movement : MonoBehaviour
         return pos;
     }
 
-
+    public void ResetPosition()
+    {
+        direction = Vector2.zero;
+        currentPos = transform.position;
+        nextPosition = transform.position;
+    }
     //async void Movement()
     //{
     //    Task task;

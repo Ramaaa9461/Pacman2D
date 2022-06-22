@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] Tilemap tile;
 
     PlayerController playerController;
+
+    public UnityEvent setDirectionZero;
 
     private void Awake()
     {
@@ -28,6 +31,11 @@ public class GameManager : MonoBehaviour
             {
                 PlayerGhosthCollision(ghosts[i]);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            ResetPositions();
         }
     }
 
@@ -53,6 +61,7 @@ public class GameManager : MonoBehaviour
         if (playerController.CanBeAttacked)
         {
             ghost.transform.position = ghost.GetComponent<Ghost_Movement>().InitialPosition;
+            ghost.GetComponent<Entitys_Movement>().ResetPosition();
         }
         else
         {
@@ -69,6 +78,8 @@ public class GameManager : MonoBehaviour
         {
             ghosts[i].transform.position = ghosts[i].GetComponent<Ghost_Movement>().InitialPosition;
         }
+
+        setDirectionZero.Invoke();
     }
 
     public void PauseGame()
