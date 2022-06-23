@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Ghost_Movement : MonoBehaviour
 {
-    public Vector2 initialPosition;
+    private Vector2 initialPosition;
     protected Entitys_Movement entitys_movement;
     protected Vector2 direction;
 
+    public Vector2 InitialPosition
+    {
+        get { return initialPosition; }
+        set { initialPosition = value; }
+    }
 
     private void Awake()
     {

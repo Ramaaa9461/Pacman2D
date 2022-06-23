@@ -1,22 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
-{
-    [SerializeField] GameObject gameOverPanel;
-    [SerializeField] TextMeshProUGUI score_text;
-    [SerializeField] TextMeshProUGUI highScore_text;
-    [SerializeField] Image[] lifes;
+{ 
+    public UnityEvent<int> changeScore;
+    public UnityEvent<int> changeHighScore;
+    public UnityEvent<int> changeLife;
 
     const string highScorePath = "HS";
 
+    Vector2 initialPosition;
     int score = 0;
     int highSocre;
     int life = 3;
-    public Vector2 initialPosition;
     bool canBeAttacked = false;
-    
+
+    public Vector2 InitialPosition
+    {
+        get { return initialPosition; }
+        set { initialPosition = value; }
+    }
+
     public bool CanBeAttacked
     {
         get { return canBeAttacked; }
@@ -39,24 +45,15 @@ public class PlayerController : MonoBehaviour
         initialPosition = transform.position;
     }
 
-
     public void AddPoint()
     {
         score++;
+        changeScore.Invoke(score);
+
         if (score >= highSocre)
         {
             highSocre = score;
-        }
-    }
-
-    private void Update()
-    {
-        score_text.text = (score).ToString();
-        highScore_text.text = (highSocre).ToString();
-
-        if (life <= 0)
-        {
-            PlayerPrefs.SetInt(highScorePath, highSocre);
+            changeHighScore.Invoke(highSocre);
         }
     }
     
@@ -64,22 +61,6 @@ public class PlayerController : MonoBehaviour
     {
         life--;
 
-        if (life <= 0)
-        {
-            gameOverPanel.SetActive(true);
-        }
-
-        for (int i = 0; i < lifes.Length; i++)
-        {
-            lifes[i].enabled = false;
-        }
-        for (int i = 0; i < life; i++)
-        {
-            lifes[i].enabled = true;
-        }
-
-        
+        changeLife.Invoke(life);
     }
-
-
 }

@@ -7,8 +7,8 @@ using UnityEngine;
 public class AnimatorControl : MonoBehaviour
 {
     Entitys_Movement entitys_Movement;
-    Vector2 lastDirection;
     Animator animator;
+    Vector2 lastDirection;
 
     private void Awake()
     {
@@ -28,8 +28,6 @@ public class AnimatorControl : MonoBehaviour
         animator.SetFloat("Speed", Vector2.ClampMagnitude(entitys_Movement.Direction, 1).magnitude); // direction.magnitude / maxVelocity 
 
     }
-
-    
 
 
 }
