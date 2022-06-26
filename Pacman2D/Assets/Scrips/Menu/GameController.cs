@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 
     public void OnLevel()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Test");
     }
     public void OnExit()
     {
