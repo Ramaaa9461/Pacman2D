@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UImanager : MonoBehaviour
@@ -9,18 +10,18 @@ public class UImanager : MonoBehaviour
     [SerializeField] TextMeshProUGUI highScore_text;
     [SerializeField] Image[] lifes;
 
-    const string highScorePath = "HS";
+    public UnityEvent<int> loadHighScore;
+    public UnityEvent<int> saveHighScore;
 
+    int highScore = 0;
 
     void Start()
     {
-        if (PlayerPrefs.HasKey(highScorePath)) //Sacar de aca
-        {
-           // highSocre = PlayerPrefs.GetInt(highScorePath);
-        }
+         loadHighScore.Invoke(highScore); //No funciona;
+        
+        highScore_text.text = highScore.ToString(); 
 
         score_text.text = "0";
-        highScore_text.text = "0";
     }
 
     public void ChangeTheScore(int newScore)
@@ -30,6 +31,7 @@ public class UImanager : MonoBehaviour
     public void ChangeTheHighScore(int newHighScore)
     {
         highScore_text.text = (newHighScore).ToString();
+        highScore = newHighScore;
     }
 
     public void restLife(int newLife)
@@ -37,7 +39,7 @@ public class UImanager : MonoBehaviour
         if (newLife <= 0)
         {
             gameOverPanel.SetActive(true);
-            //  PlayerPrefs.SetInt(highScorePath, highSocre); //Sacar de aca
+            saveHighScore.Invoke(highScore);
         }
 
         for (int i = 0; i < lifes.Length; i++)

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 initialPosition;
     int score = 0;
-    int highSocre;
+    int highScore;
     int life = 3;
     bool canBeAttacked = false;
 
@@ -37,11 +37,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey(highScorePath))
-        {
-            highSocre = PlayerPrefs.GetInt(highScorePath);
-        }
-
         initialPosition = transform.position;
     }
 
@@ -50,10 +45,10 @@ public class PlayerController : MonoBehaviour
         score++;
         changeScore.Invoke(score);
 
-        if (score >= highSocre)
+        if (score >= highScore)
         {
-            highSocre = score;
-            changeHighScore.Invoke(highSocre);
+            highScore = score;
+            changeHighScore.Invoke(highScore);
         }
     }
     
