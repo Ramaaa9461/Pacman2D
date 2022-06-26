@@ -303,10 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!212 &64401756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7531,9 +7527,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1099669757}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 295632118}
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: OnLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
