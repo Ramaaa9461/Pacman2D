@@ -1,21 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SaveLoadHighScore : MonoBehaviour
 {
     const string highScorePath = "HS";
+    public UnityEvent<int> loadHighScore;
 
-    public void LoadHighScore(ref int highScore)
+    public void LoadHighScore()
     {
-        if (PlayerPrefs.HasKey(highScorePath)) //Sacar de aca
+        int highScore = 0;
+
+        if (PlayerPrefs.HasKey(highScorePath))
         {
             highScore = PlayerPrefs.GetInt(highScorePath);
         }
+
+        loadHighScore.Invoke(highScore); //Asignarlo a UI y al personaje
     }
-    public void LoadHighScore(int newHighScore)
+
+    public void SaveHighScore(int newHighScore)
     {
-        PlayerPrefs.SetInt(highScorePath, newHighScore); 
+        PlayerPrefs.SetInt(highScorePath, newHighScore);
     }
 
 

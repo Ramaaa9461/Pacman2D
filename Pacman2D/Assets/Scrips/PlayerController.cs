@@ -58,4 +58,9 @@ public class PlayerController : MonoBehaviour
 
         changeLife.Invoke(life);
     }
+
+    public void AssignHighScore(int HighScore)
+    {
+        highScore = HighScore;
+    }
 }

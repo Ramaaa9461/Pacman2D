@@ -21,8 +21,8 @@ public class UIinteraction : MonoBehaviour
         else
         {
             toggle.isOn = true;
-            slider.value = volume;
         }
+            slider.value = volume;
     }
 
     public void MusicActive(bool isActive)
