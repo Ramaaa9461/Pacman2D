@@ -15,6 +15,10 @@ public class SaveLoadDataAudio : MonoBehaviour
         {
             setPreloadVolume.Invoke(PlayerPrefs.GetFloat(musicPath));
         }
+        else
+        {
+            setPreloadVolume.Invoke(.5f);
+        }
     }
 
     public void SaveNewVolume(float volume)

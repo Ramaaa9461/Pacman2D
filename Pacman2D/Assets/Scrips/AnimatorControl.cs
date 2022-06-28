@@ -29,5 +29,10 @@ public class AnimatorControl : MonoBehaviour
 
     }
 
+    public void ChangeColor(bool isAttack)
+    {
+        animator.SetBool("BlueGhost", isAttack);
+    }
+
 
 }

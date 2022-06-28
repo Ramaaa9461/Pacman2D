@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UImanager : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] TextMeshProUGUI titleGameOverPanel;
     [SerializeField] TextMeshProUGUI score_text;
     [SerializeField] TextMeshProUGUI highScore_text;
     [SerializeField] Image[] lifes;
@@ -14,14 +15,19 @@ public class UImanager : MonoBehaviour
     public UnityEvent<int> saveHighScore;
 
     int highScore = 0;
-
+    int maxPointToWin;
     void Start()
     {
-        loadHighScore.Invoke(); //No funciona;
+        loadHighScore.Invoke();
 
         highScore_text.text = highScore.ToString();
 
         score_text.text = "0";
+    }
+
+    public void RecibeMaxPointsToWin(int totalPoints)
+    {
+        maxPointToWin = totalPoints;
     }
 
     public void AssignHighScore(int HighScore)
@@ -32,6 +38,13 @@ public class UImanager : MonoBehaviour
     public void ChangeTheScore(int newScore)
     {
         score_text.text = (newScore).ToString();
+
+        if (newScore >= maxPointToWin) 
+        {
+            gameOverPanel.SetActive(true);
+            titleGameOverPanel.text = "You Win";
+            saveHighScore.Invoke(highScore);
+        }
     }
 
     public void ChangeTheHighScore(int newHighScore)
@@ -45,6 +58,7 @@ public class UImanager : MonoBehaviour
         if (newLife <= 0)
         {
             gameOverPanel.SetActive(true);
+            titleGameOverPanel.text = "Game Over";
             saveHighScore.Invoke(highScore);
         }
 
