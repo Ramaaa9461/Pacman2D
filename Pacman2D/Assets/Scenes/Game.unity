@@ -494,7 +494,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 277254645}
-  - component: {fileID: 277254644}
   - component: {fileID: 277254648}
   - component: {fileID: 277254647}
   - component: {fileID: 277254646}
@@ -505,22 +504,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &277254644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277254643}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65b52cb7dd7cf69448dbd9b4a5263a5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSources:
-  - {fileID: 1645371242}
-  toggle: {fileID: 1913448822}
-  slider: {fileID: 1948139671}
 --- !u!4 &277254645
 Transform:
   m_ObjectHideFlags: 0
@@ -1237,6 +1220,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -1610,6 +1597,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -382021139, guid: c85211e6748bf354cbb4ec9dc24515b0, type: 3}
+    - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -7421,6 +7412,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 673562785}
     m_Modifications:
+    - target: {fileID: 463334162195314248, guid: d1e9de40d2a1dd94da62664b4840f590, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 463334162195314249, guid: d1e9de40d2a1dd94da62664b4840f590, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -9276,6 +9271,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -224706938, guid: c85211e6748bf354cbb4ec9dc24515b0, type: 3}
     - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
@@ -9364,6 +9363,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1460403123, guid: c85211e6748bf354cbb4ec9dc24515b0, type: 3}
+    - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2121611005116448596, guid: ea9f8806490599a4e9fc5463100c1d1e, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -10733,7 +10736,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 277254644}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusicControl, Assembly-CSharp
         m_MethodName: MusicActive
         m_Mode: 0
@@ -10913,7 +10916,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 277254644}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MusicControl, Assembly-CSharp
         m_MethodName: MusicVolume
         m_Mode: 0
