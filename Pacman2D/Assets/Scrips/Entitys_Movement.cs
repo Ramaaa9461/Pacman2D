@@ -98,6 +98,7 @@ public class Entitys_Movement : MonoBehaviour
         currentPos = transform.position;
         nextPosition = transform.position;
     }
+
     //async void Movement()
     //{
     //    Task task;

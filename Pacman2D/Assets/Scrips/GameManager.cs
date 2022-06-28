@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
-    public UnityEvent setDirectionZero;
     public UnityEvent<int> setTotalPointsInLevel;
 
     [SerializeField] List<GameObject> ghosts;
@@ -96,9 +95,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < ghosts.Count; i++)
         {
             ghosts[i].transform.position = ghosts[i].GetComponent<Ghost_Movement>().InitialPosition;
+            ghosts[i].GetComponent<Entitys_Movement>().ResetPosition();
         }
-
-        setDirectionZero.Invoke();
+            player.GetComponent<Entitys_Movement>().ResetPosition();
     }
 
     public void PauseGame()

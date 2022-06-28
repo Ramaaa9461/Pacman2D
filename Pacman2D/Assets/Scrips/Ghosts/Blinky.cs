@@ -21,11 +21,13 @@ public class Blinky : Ghost_Movement
                 direction = Vector2.up;
 
                 break;
+            
             case 1:
 
                 direction = Vector2.down;
 
                 break;
+            
             case 2:
 
                 direction =Vector2.left;
@@ -34,6 +36,7 @@ public class Blinky : Ghost_Movement
             case 3:
 
                 direction = Vector2.right;
+
                 break;
         }
     }
