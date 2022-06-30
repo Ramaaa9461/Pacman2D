@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -36,12 +34,15 @@ public class UIinteraction : MonoBehaviour
             volume = 0;
         }
 
+        SetUIValues(volume);
         changeMusicVolume.Invoke(volume);
     }
 
     public void MusicVolume(float volume)
     {
         this.volume = volume;
+
+        SetUIValues(volume);
         changeMusicVolume.Invoke(volume);
     }
 }
